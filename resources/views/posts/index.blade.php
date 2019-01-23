@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends('layouts.dashboard')
 
 @section('title','| Posts')
 
@@ -9,7 +9,7 @@
         <h1>All Posts</h1>
     </div>
     <div class="col-md-3" style="white-space:nowrap;">
-      <a href="{{ route('posts.create') }}" class="btn btn-lg btn-primary btn-block">Add New Post</a>
+      <a href="{{ route('posts.create') }}" class="btn btn-lg btn-success btn-block">Add New Post</a>
     </div>
   </div>
 

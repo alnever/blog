@@ -18,7 +18,7 @@
       </li>
     </ul>
 
-    <ul class="navbar-nav mr-0">
+    <ul class="navbar-nav mr-2">
       @guest
         <li class="nav-item {{ Request::is('login') ? 'active' : ''}}">
           <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -33,8 +33,8 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ Auth::user()->name }}
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Dashboard</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('posts.index') }}">Dashboard</a>
             <div class="dropdown-divider"></div>
             <!-- logout button -->
             {{ Form::open(['route' => 'logout', 'method' => 'POST']) }}
