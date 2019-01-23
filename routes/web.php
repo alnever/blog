@@ -22,4 +22,9 @@ Route::get('/post/{slug}','PageController@getPost')
 Route::redirect('/home','/');
 
 // Post routes to the resource controller
-Route::resource('/posts','PostController');
+// use middleware auth to prevern unauthorized access
+Route::resource('/posts','PostController')->middleware('auth');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

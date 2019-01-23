@@ -16,22 +16,34 @@
       <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
         <a class="nav-link" href="/contact">Contact</a>
       </li>
-      <!-- no dropdown yet
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-      -->
+    </ul>
+
+    <ul class="navbar-nav mr-0">
+      @guest
+        <li class="nav-item {{ Request::is('login') ? 'active' : ''}}">
+          <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+        <li class="nav-item {{ Request::is('register') ? 'active' : ''}}">
+          <a class="nav-link" href="{{ route('register') }}">Register</a>
+        </li>
+      @endguest
+
+      @auth
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ Auth::user()->name }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Dashboard</a>
+            <div class="dropdown-divider"></div>
+            <!-- logout button -->
+            {{ Form::open(['route' => 'logout', 'method' => 'POST']) }}
+              {{ Form::submit('Logout', ['class' => 'dropdown-item'])}}
+            {{ Form::close() }}
+            <!-- end of logout button -->
+          </div>
+        </li>
+      @endauth
     </ul>
     <!-- no search form yet
     <form class="form-inline my-2 my-lg-0">
