@@ -43,12 +43,12 @@ class PageController extends Controller
     /**
      * getPost - show a single post in FEUI
      *
-     * @param  {int} $id post id
+     * @param  {string} $slug post slug
      * @return {View}
      */
-    public function getPost($id) {
+    public function getPost($slug) {
       // find a post
-      $post = Post::find($id);
+      $post = Post::where('slug', '=', $slug)->first();
 
       // return a view for the post
       return view("pages.post")->withPost($post);

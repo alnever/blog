@@ -13,6 +13,9 @@
         {{ Form::label('title', 'Title:') }}
         {{ Form::text('title', null, ['class' => 'form-control','required']) }}
 
+        {{ Form::label('slug', 'Slug:') }}
+        {{ Form::text('slug', null, ['class' => 'form-control','required']) }}
+
         {{ Form::label('content', 'Content:') }}
         {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
       </div> <!-- end of main panel -->

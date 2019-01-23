@@ -16,7 +16,9 @@
 Route::get('/', 'PageController@getHome')->name('home');
 Route::get('/about', 'PageController@getAbout');
 Route::get('/contact', 'PageController@getContact');
-Route::get('/post/{id}','PageController@getPost')->name('post.view');
+Route::get('/post/{slug}','PageController@getPost')
+  ->name('post.single')
+  ->where('slug','[\w\d\_\-]+');
 Route::redirect('/home','/');
 
 // Post routes to the resource controller

@@ -19,7 +19,7 @@
             {{ Str::words($post->content, 30) }}
           </p>
           <p class="text-right">
-            <a class="btn btn-primary" href="{{ route('post.view', $post->id) }}">Read more...</a>
+            <a class="btn btn-primary" href="{{ route('post.single', $post->slug) }}">Read more...</a>
           </p>
         </div>
      @endforeach
