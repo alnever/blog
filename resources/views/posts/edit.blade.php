@@ -1,6 +1,6 @@
 @extends('layouts.page')
 
-@section('title', '| View post')
+@section('title', '| Edit post')
 
 @section('content')
   <h1>Edit post</h1>
@@ -44,7 +44,7 @@
               {{ Html::linkRoute('posts.index', '<< Back to Posts List', null, ['class' => 'btn btn-secondary btn-block']) }}
           </div>
         </div>
-        
+
 
       </div>
     </div> <!-- end of service area -->

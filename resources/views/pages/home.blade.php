@@ -10,46 +10,23 @@
   </div>
 
   <div class="row">
-
     <!-- main region -->
     <div class="col-md-8">
+      @foreach ($posts as $post)
+        <div class="jumbotron bg-light">
+          <h3 class="text-primary">{{ $post->title }}</h3>
+          <p>
+            {{ Str::words($post->content, 30) }}
+          </p>
+          <p class="text-right">
+            <a class="btn btn-primary" href="{{ route('post.view', $post->id) }}">Read more...</a>
+          </p>
+        </div>
+     @endforeach
 
-      <div class="jumbotron">
-        <h3 class="text-primary">Post title</h3>
-        <p>
-          Mauris dui lectus, fermentum non quam ut, scelerisque dapibus tortor.
-          Donec fermentum, erat vitae rhoncus blandit, ante lacus laoreet turpis,
-          eu tempus sapien lorem ut massa.
-        </p>
-        <p class="text-right">
-          <a class="btn btn-primary" href="#">Read more...</a>
-        </p>
-      </div>
-
-      <div class="jumbotron">
-        <h3 class="text-primary">Post title</h3>
-        <p>
-          Mauris dui lectus, fermentum non quam ut, scelerisque dapibus tortor.
-          Donec fermentum, erat vitae rhoncus blandit, ante lacus laoreet turpis,
-          eu tempus sapien lorem ut massa.
-        </p>
-        <p class="text-right">
-          <a class="btn btn-primary" href="#">Read more...</a>
-        </p>
-      </div>
-
-      <div class="jumbotron">
-        <h3 class="text-primary">Post title</h3>
-        <p>
-          Mauris dui lectus, fermentum non quam ut, scelerisque dapibus tortor.
-          Donec fermentum, erat vitae rhoncus blandit, ante lacus laoreet turpis,
-          eu tempus sapien lorem ut massa.
-        </p>
-        <p class="text-right">
-          <a class="btn btn-primary" href="#">Read more...</a>
-        </p>
-      </div>
-
+     <div class="d-flex flex-row justify-content-center">
+       {{ $posts->links() }}
+     </div>
     </div>
 
     <!-- sidebar -->

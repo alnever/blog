@@ -13,9 +13,10 @@
 
 
 // Page routes
-Route::get('/', 'PageController@getHome');
+Route::get('/', 'PageController@getHome')->name('home');
 Route::get('/about', 'PageController@getAbout');
 Route::get('/contact', 'PageController@getContact');
+Route::get('/post/{id}','PageController@getPost')->name('post.view');
 Route::redirect('/home','/');
 
 // Post routes to the resource controller

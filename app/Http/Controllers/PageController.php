@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Post;
+
 class PageController extends Controller
 {
 
@@ -13,7 +15,8 @@ class PageController extends Controller
      * @return {View}
      */
     public function getHome() {
-      return view("pages.home");
+      $posts = Post::orderBy('id','desc')->paginate(10);
+      return view("pages.home")->withPosts($posts);
     }
 
 
@@ -30,9 +33,24 @@ class PageController extends Controller
     /**
      * getContact - return Contact page
      *
-     * @return {View} 
+     * @return {View}
      */
     public function getContact() {
       return view("pages.contact");
+    }
+
+
+    /**
+     * getPost - show a single post in FEUI
+     *
+     * @param  {int} $id post id
+     * @return {View}
+     */
+    public function getPost($id) {
+      // find a post
+      $post = Post::find($id);
+
+      // return a view for the post
+      return view("pages.post")->withPost($post);
     }
 }
