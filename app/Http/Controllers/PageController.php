@@ -53,4 +53,17 @@ class PageController extends Controller
       // return a view for the post
       return view("pages.post")->withPost($post);
     }
+
+
+    /**
+     * getCategory - description
+     *
+     * @param  string $slug - category's slug
+     * @return View
+     *
+     * TODO::find posts for the category and show a list of the found posts     
+     */
+    public function getCategory($slug) {
+      return view("pages.category");
+    }
 }

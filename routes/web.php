@@ -19,11 +19,19 @@ Route::get('/contact', 'PageController@getContact');
 Route::get('/post/{slug}','PageController@getPost')
   ->name('post.single')
   ->where('slug','[\w\d\_\-]+');
+Route::get('/category/{slug}','PageController@getCategory')
+    ->name('category.single')
+    ->where('slug','[\w\d\_\-]+');
 Route::redirect('/home','/');
 
 // Post routes to the resource controller
 // use middleware auth to prevern unauthorized access
-Route::resource('/posts','PostController')->middleware('auth');
+// Route::resource('/posts','PostController')->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function() {
+  Route::resource('/posts','PostController');
+  Route::resource('/categories','CategoryController');
+});
 
 Auth::routes();
 
