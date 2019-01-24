@@ -13,4 +13,15 @@
   @if ($post->category)
     <p>Posted In: {{ $post->category->name }}</p>
   @endif
+
+  @if (count($post->tags) > 0)
+    <p>
+      Tags:
+      @foreach ($post->tags as $tag)
+        <span class="badge badge-secondary">
+          {{ $tag->name }}
+        </span>
+      @endforeach
+    </p>
+  @endif
 @endsection

@@ -8,4 +8,14 @@ class Tag extends Model
 {
     //
     protected $fillable = ['name', 'created_at', 'updated_at'];
+
+
+    /**
+     * posts - return posts with current tag
+     *
+     * @return App\Post  
+     */
+    public function posts() {
+      return $this->belongsToMany('App\Post','post_tag','tag_id','post_id');
+    }
 }

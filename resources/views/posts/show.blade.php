@@ -35,6 +35,17 @@
           </dl>
         @endif
 
+        @if (count($post->tags) > 0)
+          <dl class="col-12">
+            <label>Marked With:</label>
+            @foreach ($post->tags as $tag)
+              <span class="badge badge-secondary">
+                {{ $tag->name }}
+              </span>
+            @endforeach
+          </dl>
+        @endif
+
         <hr/>
 
         <div class="row">
