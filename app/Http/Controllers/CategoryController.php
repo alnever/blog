@@ -40,7 +40,7 @@ class CategoryController extends Controller
       // validate
         $this->validate($request, [
           'name' => ['required', 'min:1', 'max:255','unique:categories,name'],
-          'slug' => ['required', 'min:1', 'max:255','unique:categories,slug'],
+          'slug' => ['required', 'min:1', 'max:255','alpha_dash','unique:categories,slug'],
         ]);
         // create new category
         $category = new Category($request->all());
@@ -93,7 +93,7 @@ class CategoryController extends Controller
         if ($request->input('name') != $category->name && $request->input('slug') != $category->slug) {
           $this->validate($request, [
             'name' => ['required', 'min:1', 'max:255','unique:categories,name'],
-            'slug' => ['required', 'min:1', 'max:255','unique:categories,slug'],
+            'slug' => ['required', 'min:1', 'max:255','alpha_dash','unique:categories,slug'],
           ]);
         } else if ($request->input('name') != $category->name && $request->input('slug') == $category->slug) {
           $this->validate($request, [
@@ -101,7 +101,7 @@ class CategoryController extends Controller
           ]);
         } else if ($request->input('name') == $category->name && $request->input('slug') != $category->slug) {
           $this->validate($request, [
-            'slug' => ['required', 'min:1', 'max:255','unique:categories,slug'],
+            'slug' => ['required', 'min:1', 'max:255','alpha_dash','unique:categories,slug'],
           ]);
         }
         // update category

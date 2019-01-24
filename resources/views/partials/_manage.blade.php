@@ -10,7 +10,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link mt-2 {{ Request::is('tags') ? 'active' : ''}}" href="#">Tags</a>
+    <a class="nav-link mt-2 {{ Request::is('tags') ? 'active' : ''}}" href="{{ route('tags.index') }}">Tags</a>
   </li>
   <li class="nav-item">
     <a class="nav-link mt-2 {{ Request::is('users') ? 'active' : ''}}" href="#">Users</a>

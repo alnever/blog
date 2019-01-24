@@ -24,15 +24,13 @@ Route::get('/category/{slug}','PageController@getCategory')
     ->where('slug','[\w\d\_\-]+');
 Route::redirect('/home','/');
 
-// Post routes to the resource controller
+// Routes to the admin panels
 // use middleware auth to prevern unauthorized access
-// Route::resource('/posts','PostController')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function() {
   Route::resource('/posts','PostController');
   Route::resource('/categories','CategoryController');
+  Route::resource('/tags','TagController');
 });
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
