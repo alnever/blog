@@ -15,6 +15,9 @@
       {{ Form::label('slug', 'Slug:') }}
       {{ Form::text('slug', null, ['class' => 'form-control','required']) }}
 
+      {{ Form::label('category_id', 'Category:') }}
+      {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+
       {{ Form::label('content', 'Content:') }}
       {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
     </div>

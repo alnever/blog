@@ -28,6 +28,12 @@
           <label>Updated At:</label>
           <p>{{ date('Y-m-d H:i:s', strtotime($post->created_at)) }}</p>
         </dl>
+        @if ($post->category)
+          <dl class="col-12">
+            <label>Posted In:</label>
+            <p>{{ $post->category->name }}</p>
+          </dl>
+        @endif
 
         <hr/>
 

@@ -6,6 +6,8 @@ use App\Post;
 use Illuminate\Http\Request;
 use Session;
 
+use App\Category;
+
 class PostController extends Controller
 {
     /**
@@ -26,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+      $categories = Category::all();
+      return view('posts.create')->withCategories($categories);
     }
 
     /**
@@ -67,7 +70,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
+      // get the post
       $post = Post::find($id);
+      // return a view
       return view('posts.show')->withPost($post);
     }
 
@@ -80,7 +85,13 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('posts.edit')->withPost($post);
+        // get categories and convert them into an array for select element
+        $categories = [];
+        foreach (Category::all() as $category) {
+          $categories[$category->id] = $category->name;
+        }
+        // return a view with an edit form
+        return view('posts.edit')->withPost($post)->withCategories($categories);
     }
 
     /**
