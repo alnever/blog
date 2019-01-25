@@ -54,12 +54,14 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($id)
     {
-        //
+        // find a tag
+        $tag = Tag::find($id);
+        return view('tags.show')->withTag($tag);
     }
 
     /**

@@ -14,10 +14,10 @@ class Category extends Model
     /**
      * posts - return posts for the category
      *
-     * @return App\Post     
+     * @return App\Post
      */
     public function posts() {
-      return $this->belognsToMany('App\Post','post_category','category_id','post_id');
+      return $this->belongsToMany('App\Post','post_category','category_id','post_id');
     }
 
 }

@@ -3,20 +3,12 @@
 @section('title','| Categories')
 
 @section('content')
-  <!-- header of the table -->
-  <div class="row">
-    <div class="col-md-9">
-        <h1>All Categories</h1>
-    </div>
-    <div class="col-md-3" style="white-space:nowrap;">
-      <a href="{{ route('categories.create') }}" class="btn btn-lg btn-success btn-block">Add New Category</a>
-    </div>
-  </div>
 
   <!-- categories zone -->
-  <div class="row mt-2">
-    <div class="col-md-12">
-
+  <div class="col-12 row mt-2">
+    <!-- list zone -->
+    <div class="col-8">
+      <h1>All Categories</h1>
       <!-- categories list -->
       <table class="table">
         <thead class="thead-light">
@@ -40,7 +32,8 @@
               </td>
               <td>
                 <!-- operation buttons -->
-                <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-row justify-content-end">
+                  <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-light">Show</a>
                   <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-light">Edit</a>
                   {{ Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'DELETE']) }}
                     {{ Form::submit('Delete', ['class' => 'btn btn-sm btn-light'])}}
@@ -57,6 +50,24 @@
         {{ $categories->links() }}
       </div>
     </div>
-  </div> <!-- end of categories zone -->
+
+    <!-- new category form -->
+    <div class="col-4">
+      <div class="jumbotron">
+        <h3>Add New Category</h3>
+        {{ Form::open(['route' => 'categories.store']) }}
+
+        {{ Form::label('name', 'Name:') }}
+        {{ Form::text('name', null, ['class' => 'form-control','required']) }}
+
+        {{ Form::label('slug', 'Slug:') }}
+        {{ Form::text('slug', null, ['class' => 'form-control','required']) }}
+
+        {{ Form::submit('Save category', ['class' => 'btn btn-success btn-block mt-2'])}}
+
+        {{ Form::close() }}
+      </div>
+    </div>
+  </div>
 
 @endsection

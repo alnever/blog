@@ -4,7 +4,7 @@
 
 @section('content')
   <!-- header of the table -->
-  <div class="row">
+  <div class="col-12 row mt-2">
     <div class="col-md-8">
         <h1>All Tags</h1>
         <table class="table">
@@ -29,7 +29,8 @@
                 </td>
                 <td>
                   <!-- operation buttons -->
-                  <div class="d-flex flex-row justify-content-between">
+                  <div class="d-flex flex-row justify-content-end">
+                    <a href="{{ route('tags.show', $tag->id) }}" class="btn btn-sm btn-light">Show</a>
                     <a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-sm btn-light">Edit</a>
                     {{ Form::open(['route' => ['tags.destroy', $tag->id], 'method' => 'DELETE']) }}
                       {{ Form::submit('Delete', ['class' => 'btn btn-sm btn-light'])}}
@@ -49,12 +50,14 @@
 
     <!-- add tag form -->
     <div class="col-md-4">
-      <h3>Add New Tag</h3>
-      {{ Form::open(['route' => 'tags.store']) }}
-        {{ Form::label('name', 'Name:') }}
-        {{ Form::text('name', null, ['class' => 'form-control','required']) }}
-        {{ Form::submit('Save tag', ['class' => 'btn btn-success btn-block mt-2'])}}
-      {{ Form::close() }}
+      <div class="jumbotron">
+        <h3>Add New Tag</h3>
+        {{ Form::open(['route' => 'tags.store']) }}
+          {{ Form::label('name', 'Name:') }}
+          {{ Form::text('name', null, ['class' => 'form-control','required']) }}
+          {{ Form::submit('Save tag', ['class' => 'btn btn-success btn-block mt-2'])}}
+        {{ Form::close() }}
+      </div>
     </div>
 
   </div> <!-- end of row -->

@@ -43,7 +43,7 @@
               </td>
               <td>
                 <!-- operation buttons -->
-                <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-row justify-content-end">
                   <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-light">Edit</a>
                   {{ Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) }}
                     {{ Form::submit('Delete', ['class' => 'btn btn-sm btn-light'])}}
