@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -29,7 +30,10 @@ class PostController extends Controller
     public function create()
     {
       $categories = Category::all();
-      return view('posts.create')->withCategories($categories);
+      $tags = Tag::all();
+      return view('posts.create')
+        ->withCategories($categories)
+        ->withTags($tags);
     }
 
     /**
@@ -49,11 +53,11 @@ class PostController extends Controller
 
         // store in the database
         $post = new Post($request->all());
-
-        // $post->title = $request->title;
-        // $post->content = $request->content;
-
         $post->save();
+
+        // add Tags
+        // false - not rewrite existing associations
+        $post->tags()->sync($request->input('tags'), false);
 
         // flash message
         Session::flash('success','The new post is successfully created!');
@@ -90,8 +94,16 @@ class PostController extends Controller
         foreach (Category::all() as $category) {
           $categories[$category->id] = $category->name;
         }
+        // get tags
+        $tags = [];
+        foreach (Tag::all() as $tag) {
+          $tags[$tag->id] = $tag->name;
+        }
         // return a view with an edit form
-        return view('posts.edit')->withPost($post)->withCategories($categories);
+        return view('posts.edit')
+          ->withPost($post)
+          ->withCategories($categories)
+          ->withTags($tags);
     }
 
     /**
@@ -125,6 +137,10 @@ class PostController extends Controller
 
       // save data
       $post->save();
+
+      // save Tags
+      // recreating associations
+      $post->tags()->sync($request->input('tags'), true);
 
       //send flash message
       Session::flash('success','The post was updated successfully.');

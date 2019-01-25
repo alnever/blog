@@ -9,6 +9,17 @@
       <h1 class="text-center">{{ $post->title }}</h1>
       <hr class="my-4" />
       <p>{{ $post->content }}</p>
+      <hr>
+
+      @if (count($post->tags) > 0)
+        <div class="">
+          @foreach ($post->tags as $tag)
+            <span class="badge badge-secondary badge-lg">
+              {{ $tag->name }}
+            </span>
+          @endforeach
+        </div>
+      @endif
     </div>
 
     <!-- info and service area -->
@@ -32,17 +43,6 @@
           <dl class="col-12">
             <label>Posted In:</label>
             <p>{{ $post->category->name }}</p>
-          </dl>
-        @endif
-
-        @if (count($post->tags) > 0)
-          <dl class="col-12">
-            <label>Marked With:</label>
-            @foreach ($post->tags as $tag)
-              <span class="badge badge-secondary">
-                {{ $tag->name }}
-              </span>
-            @endforeach
           </dl>
         @endif
 

@@ -15,13 +15,13 @@
   @endif
 
   @if (count($post->tags) > 0)
-    <p>
-      Tags:
+    <hr />
+    <div>
       @foreach ($post->tags as $tag)
         <span class="badge badge-secondary">
           {{ $tag->name }}
         </span>
       @endforeach
-    </p>
+    </div>
   @endif
 @endsection

@@ -2,6 +2,11 @@
 
 @section('title', '| Edit post')
 
+@section('styles')
+  <!-- for select 2 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
   <h1>Edit post</h1>
   {{ Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) }}
@@ -17,6 +22,9 @@
 
       {{ Form::label('category_id', 'Category:') }}
       {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+
+      {{ Form::label('tags', 'Tags:') }}
+      {{ Form::select('tags[]', $tags, null, ['class' => 'select2-multi form-control', 'multiple' => 'multiple']) }}
 
       {{ Form::label('content', 'Content:') }}
       {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
@@ -64,4 +72,12 @@
   </div> <!-- end of .row -->
   {{ Form::close() }}
 
+@endsection
+
+@section('scripts')
+  <!-- for select2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script type="text/javascript">
+    $('.select2-multi').select2();
+  </script>
 @endsection
