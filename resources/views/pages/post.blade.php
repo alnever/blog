@@ -14,14 +14,24 @@
     <p>Posted In: {{ $post->category->name }}</p>
   @endif
 
+  @if (count($post->categories) > 0)
+    <div class="">Categories:
+      @foreach ($post->categories as $category)
+        <span class="badge badge-primary badge-lg">
+          {{ $category->name }}
+        </span>
+      @endforeach
+    </div>
+  @endif
+
   @if (count($post->tags) > 0)
-    <hr />
-    <div>
+    <div class="">Tags:
       @foreach ($post->tags as $tag)
-        <span class="badge badge-secondary">
+        <span class="badge badge-secondary badge-lg">
           {{ $tag->name }}
         </span>
       @endforeach
     </div>
   @endif
+
 @endsection

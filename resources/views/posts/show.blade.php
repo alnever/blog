@@ -11,8 +11,18 @@
       <p>{{ $post->content }}</p>
       <hr>
 
+      @if (count($post->categories) > 0)
+        <div class="">Categories:
+          @foreach ($post->categories as $category)
+            <span class="badge badge-primary badge-lg">
+              {{ $category->name }}
+            </span>
+          @endforeach
+        </div>
+      @endif
+
       @if (count($post->tags) > 0)
-        <div class="">
+        <div class="">Tags:
           @foreach ($post->tags as $tag)
             <span class="badge badge-secondary badge-lg">
               {{ $tag->name }}

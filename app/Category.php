@@ -10,16 +10,14 @@ class Category extends Model
     //
     protected $fillable = ['name', 'slug', 'created_at', 'updated_at'];
 
+
+    /**
+     * posts - return posts for the category
+     *
+     * @return App\Post     
+     */
     public function posts() {
-      return $this->hasMany('App\Post');
+      return $this->belognsToMany('App\Post','post_category','category_id','post_id');
     }
 
-    public function delete() {
-      // delete from child tables
-      DB::table("posts")
-        ->where("category_id","=",$this->id)
-        ->update(["category_id" => null]);
-      // delete current record
-      parent::delete();
-    }
 }

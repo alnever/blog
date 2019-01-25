@@ -55,6 +55,9 @@ class PostController extends Controller
         $post = new Post($request->all());
         $post->save();
 
+        // add categories
+        $post->categories()->sync($request->input('categories'), false);
+
         // add Tags
         // false - not rewrite existing associations
         $post->tags()->sync($request->input('tags'), false);
@@ -141,6 +144,9 @@ class PostController extends Controller
       // save Tags
       // recreating associations
       $post->tags()->sync($request->input('tags'), true);
+
+      // add categories
+      $post->categories()->sync($request->input('categories'), true);
 
       //send flash message
       Session::flash('success','The post was updated successfully.');

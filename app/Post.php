@@ -12,26 +12,25 @@ class Post extends Model
       'title',
       'content',
       'slug',
-      'category_id',
       'created_at',
       'updated_at',
    ];
 
 
    /**
-    * category - return category of this post
+    * category - return categories for the post
     *
     * @return App\Category
     */
-   public function category() {
-     return $this->belongsTo('App\Category');
+   public function categories() {
+     return $this->belongsToMany('App\Category','post_category','post_id','category_id');
    }
 
 
    /**
     * tags - return tags of current post
     *
-    * @return App\Tag    
+    * @return App\Tag
     */
    public function tags() {
       return $this->belongsToMany('App\Tag','post_tag','post_id','tag_id');

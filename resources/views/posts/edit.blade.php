@@ -20,11 +20,11 @@
       {{ Form::label('slug', 'Slug:') }}
       {{ Form::text('slug', null, ['class' => 'form-control','required']) }}
 
-      {{ Form::label('category_id', 'Category:') }}
-      {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+      {{ Form::label('categories', 'Category:') }}
+      {{ Form::select('categories[]', $categories, null, ['class' => 'categories-select2-multi form-control', 'multiple' => 'multiple']) }}
 
       {{ Form::label('tags', 'Tags:') }}
-      {{ Form::select('tags[]', $tags, null, ['class' => 'select2-multi form-control', 'multiple' => 'multiple']) }}
+      {{ Form::select('tags[]', $tags, null, ['class' => 'tags-select2-multi form-control', 'multiple' => 'multiple']) }}
 
       {{ Form::label('content', 'Content:') }}
       {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
@@ -78,6 +78,7 @@
   <!-- for select2 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script type="text/javascript">
-    $('.select2-multi').select2();
+    $('.categories-select2-multi').select2();
+    $('.tags-select2-multi').select2();
   </script>
 @endsection

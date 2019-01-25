@@ -22,16 +22,18 @@
         {{ Form::text('slug', null, ['class' => 'form-control','required']) }}
 
         <!-- category select -->
-        {{ Form::label('category_id', 'Category:')}}
-        <select class="form-control" name="category_id">
-          @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-          @endforeach
-        </select>
+        <div class="">
+          {{ Form::label('categories', 'Category:') }}
+          <select class="form-control categories-select2-multi" name="categories[]" multiple="multiple">
+            @foreach ($categories as $category)
+              <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+          </select>
+        </div>
 
         <div class="">
           {{ Form::label('tags', 'Tags:')}}
-          <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+          <select class="form-control tags-select2-multi" name="tags[]" multiple="multiple">
             @foreach ($tags as $tag)
               <option value="{{ $tag->id }}">{{ $tag->name }}</option>
             @endforeach
@@ -68,6 +70,7 @@
   <!-- for select2 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script type="text/javascript">
-    $('.select2-multi').select2();
+    $('.categories-select2-multi').select2();
+    $('.tags-select2-multi').select2();
   </script>
 @endsection
