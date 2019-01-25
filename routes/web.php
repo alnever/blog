@@ -16,13 +16,19 @@
 Route::get('/', 'PageController@getHome')->name('home');
 Route::get('/about', 'PageController@getAbout');
 Route::get('/contact', 'PageController@getContact');
-Route::get('/post/{slug}','PageController@getPost')
+Route::redirect('/home','/');
+
+// Blog pages
+Route::get('/post/{slug}','BlogController@getPost')
   ->name('post.single')
   ->where('slug','[\w\d\_\-]+');
-Route::get('/category/{slug}','PageController@getCategory')
+Route::get('/category/{slug}','BlogController@getCategory')
     ->name('category.single')
     ->where('slug','[\w\d\_\-]+');
-Route::redirect('/home','/');
+Route::get('/tag/{slug}','BlogController@getTag')
+    ->name('tag.single')
+    ->where('tag','[\w\d\_\-]+');
+
 
 // Routes to the admin panels
 // use middleware auth to prevern unauthorized access

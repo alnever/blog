@@ -39,7 +39,7 @@ class TagController extends Controller
     {
         // validate
         $this->validate($request,[
-          'name' => ['required', 'min:1', 'max:255','unique:tags,name'],
+          'name' => ['required', 'min:1', 'max:255', 'alpha_dash', 'unique:tags,name'],
         ]);
         // create new tag
         $tag = new Tag($request->all());
@@ -92,7 +92,7 @@ class TagController extends Controller
         // validate
         if ($request->input('name') != $tag->name) {
           $this->validate($request,[
-            'name' => ['required', 'min:1', 'max:255','unique:tags,name'],
+            'name' => ['required', 'min:1', 'max:255', 'alpha_dash', 'unique:tags,name'],
           ]);
         }
         // update

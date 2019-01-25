@@ -17,9 +17,9 @@
   @if (count($post->categories) > 0)
     <div class="">Categories:
       @foreach ($post->categories as $category)
-        <span class="badge badge-primary badge-lg">
+        <a href="{{ route('category.single', $category->slug) }}" class="badge badge-primary">
           {{ $category->name }}
-        </span>
+        </a>
       @endforeach
     </div>
   @endif
@@ -27,9 +27,9 @@
   @if (count($post->tags) > 0)
     <div class="">Tags:
       @foreach ($post->tags as $tag)
-        <span class="badge badge-secondary badge-lg">
+        <a href="{{ route('tag.single', $tag->name) }}" class="badge badge-secondary">
           {{ $tag->name }}
-        </span>
+        </a>
       @endforeach
     </div>
   @endif
