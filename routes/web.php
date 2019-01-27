@@ -18,6 +18,11 @@ Route::get('/about', 'PageController@getAbout');
 Route::get('/contact', 'PageController@getContact');
 Route::redirect('/home','/');
 
+// To send an email
+Route::post('/contact','PageController@postContact');
+
+
+
 // Blog pages
 Route::get('/post/{slug}','BlogController@getPost')
   ->name('post.single')

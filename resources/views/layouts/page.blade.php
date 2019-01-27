@@ -6,7 +6,6 @@
     @include('partials._nav')
 
     <div class="container mt-1">
-      @include('partials._messages')
 
       @yield('content')
 
