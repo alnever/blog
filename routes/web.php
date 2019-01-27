@@ -15,13 +15,11 @@
 // Page routes
 Route::get('/', 'PageController@getHome')->name('home');
 Route::get('/about', 'PageController@getAbout');
-Route::get('/contact', 'PageController@getContact');
 Route::redirect('/home','/');
 
-// To send an email
-Route::post('/contact','PageController@postContact');
-
-
+// Contact form routes
+Route::get('/contact', 'ContactController@getContact');
+Route::post('/contact','ContactController@postContact');
 
 // Blog pages
 Route::get('/post/{slug}','BlogController@getPost')
@@ -42,6 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/posts','PostController');
   Route::resource('/categories','CategoryController');
   Route::resource('/tags','TagController');
+  Route::resource('/messages','MessageController');
 });
 
 Auth::routes();

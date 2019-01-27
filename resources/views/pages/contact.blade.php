@@ -7,7 +7,7 @@
     <hr class="my-4" />
 
     @include('partials._messages')
-    
+
     <form class="" action="{{ url('contact') }}" method="POST">
 
       {{ csrf_field() }}
@@ -23,8 +23,8 @@
       </div>
 
       <div class="form-group">
-        <label for="message">Message:</label>
-        <textarea class="form-control" name="message" rows="7">
+        <label for="content">Message:</label>
+        <textarea class="form-control" name="content" rows="7">
         </textarea>
       </div>
 
