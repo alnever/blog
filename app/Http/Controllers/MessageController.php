@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Session;
 
 class MessageController extends Controller
 {
@@ -14,7 +15,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::orderBy('created_at','desc')->paginate(10);
+        return view('messages.index')->withMessages($messages);
     }
 
     /**
@@ -41,12 +43,20 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        //
+      // find a message
+      $message = Message::find($id);
+
+      // set message as read
+      $message->read = 1;
+      $message->save();
+
+      // show the message
+      return view('messages.show')->withMessage($message);
     }
 
     /**
@@ -75,11 +85,16 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Message  $message
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy($id)
     {
-        //
+      $message = Message::find($id);
+      $message->delete();
+
+      Session::flash('success','The message was successfully deleted.');
+
+      return redirect()->route('messages.index');
     }
 }
