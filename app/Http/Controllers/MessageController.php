@@ -55,19 +55,28 @@ class MessageController extends Controller
       $message->read = 1;
       $message->save();
 
+      // find answers
+      $answers = $message->answers()->paginate(10);
+
       // show the message
-      return view('messages.show')->withMessage($message);
+      return view('messages.show')
+        ->withMessage($message)
+        ->withAnswers($answers);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
+    public function edit($id)
     {
-        //
+        //find a message
+        $message = Message::find($id);
+
+        // redirect to answer creat
+        return view('answers.create')->withMessage($message);
     }
 
     /**

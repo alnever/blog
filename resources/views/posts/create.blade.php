@@ -43,7 +43,6 @@
         {{ Form::label('content', 'Content:') }}
         {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
 
-        {{ Form::label('') }}
       </div> <!-- end of main panel -->
 
       <!-- service panel -->

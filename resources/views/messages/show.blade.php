@@ -11,6 +11,40 @@
       <hr class="my-4" />
       <p>{{ $message->content }}</p>
       <hr>
+
+      <!-- answers list -->
+      @if (count($answers) > 0)
+        <h3>Answers:</h3>
+        <table class="table">
+          <thead>
+            <th>#</th>
+            <th>Text</th>
+            <th>Sent At</th>
+            <th></th>
+          </thead>
+          <tbody>
+            @foreach($answers as $answer)
+              <tr>
+                <td>{{ $answer->id }}</td>
+                <td>{{ $answer->content }}</td>
+                <td>{{ date('M d, Y H:i:s', strtotime($answer->created_at)) }}</td>
+                <td>
+                  {{ Form::open(['route' => ['answers.destroy', $answer->id], 'method' => 'DELETE']) }}
+                    {{ Form::submit('Delete', ['class' => 'btn btn-light btn-block']) }}
+                  {{ Form::close() }}
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <div class="d-flex flex-row justify-content-center">
+          {{ $answers->links() }}
+        </div>
+      @else
+        <div class="alert alert-primary">
+          There is no answers for this message yet.
+        </div>
+      @endif
     </div>
 
     <!-- info and service area -->

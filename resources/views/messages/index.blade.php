@@ -31,6 +31,10 @@
                 @else
                   @include('icons.new-email')
                 @endif
+
+                @if (count($message->answers) > 0)
+                  @include('icons.replied')
+                @endif
               </td>
               <td>
                 <!-- title and link to view -->

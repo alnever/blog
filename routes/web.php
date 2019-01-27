@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/categories','CategoryController');
   Route::resource('/tags','TagController');
   Route::resource('/messages','MessageController');
+  Route::resource('/answers','AnswerController');
 });
 
 Auth::routes();
