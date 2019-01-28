@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\Comment;
 
 
 class BlogController extends Controller
@@ -22,8 +23,15 @@ class BlogController extends Controller
       // find a post
       $post = Post::where('slug', '=', $slug)->first();
 
+      // comments
+      $comments = Comment::where('post_id','=',$post->id)
+        ->orderBy('created_at','desc')
+        ->paginate(10);
+
       // return a view for the post
-      return view("blog.post")->withPost($post);
+      return view("blog.post")
+        ->withPost($post)
+        ->withComments($comments);
     }
 
 

@@ -30,6 +30,54 @@
           @endforeach
         </div>
       @endif
+
+      <!-- comments -->
+      @if (count($comments) > 0)
+        <h3>Comments:</h3>
+        <table class="table">
+          <thead>
+            <th>#</th>
+            <th>Author</th>
+            <th>Text</th>
+            <th>Posted At</th>
+            <th></th>
+          </thead>
+          <tbody>
+            @foreach ($comments as $comment)
+              <tr class="align-top {{ $comment->approved == 1 ? 'bg-light' : '' }}">
+                <td>
+                  {{ $comment->id }}
+                  @if ( $comment->approved )
+                    @include('icons.approved')
+                  @endif
+                </td>
+                <td>{{ $comment->user->name }}</td>
+                <td>{{ $comment->content }}</td>
+                <td style="white-space:nowrap;">{{ date('M d, y H:i:s', strtotime($comment->created_at)) }}</td>
+                <td class="d-flex flex-row justify-content-end">
+                  {{ Form::open(['route' => ['comments.update',$comment->id], 'method' => 'PUT'])}}
+                  @if ($comment->approved == 1)
+                    {{ Form::hidden('approved', 0)}}
+                    {{ Form::submit('Disapprove',['class' => 'btn btn-outline-danger'])}}
+                  @else
+                    {{ Form::hidden('approved', 1)}}
+                    {{ Form::submit('Approve',['class' => 'btn btn-outline-success'])}}
+                  @endif
+
+                  {{ Form::close() }}
+                  {{ Form::open(['route' => ['comments.destroy',$comment->id], 'method' => 'DELETE'])}}
+                    {{ Form::submit('Delete',['class' => 'btn btn-outline-danger'])}}
+                  {{ Form::close() }}
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <div class="d-flex flex-row justify-content-center">
+          {{ $comments->links() }}
+        </div>
+      @endif
+      <!-- comments end -->
     </div>
 
     <!-- info and service area -->

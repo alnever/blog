@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::resource('/messages','MessageController')->middleware('role:Administrator');
   Route::resource('/answers','AnswerController')->middleware('role:Administrator');
   Route::resource('/users','UserController')->middleware('role:Administrator');
+  Route::resource('/comments','CommentController');
 });
 
 Auth::routes();

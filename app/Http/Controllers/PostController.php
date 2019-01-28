@@ -8,6 +8,7 @@ use Session;
 
 use App\Category;
 use App\Tag;
+use App\Comment;
 
 class PostController extends Controller
 {
@@ -79,8 +80,12 @@ class PostController extends Controller
     {
       // get the post
       $post = Post::find($id);
+      // get comments
+      $comments = Comment::where('post_id','=',$post->id)
+        ->orderBy('created_at','desc')
+        ->paginate(10);
       // return a view
-      return view('posts.show')->withPost($post);
+      return view('posts.show')->withPost($post)->withComments($comments);
     }
 
     /**

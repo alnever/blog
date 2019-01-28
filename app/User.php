@@ -38,4 +38,8 @@ class User extends Authenticatable
       $role = Role::where('name','=',$roleName)->first();
       return ($this->role->id >= $role->id);
     }
+
+    public function comments() {
+      return $this->hasMany('App\Comment');
+    }
 }
