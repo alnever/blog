@@ -66,21 +66,23 @@
         <div class="small">
           Posted By: {{ $comment->user->name }}
           Posted At: {{ $comment->created_at }}
-          <a class="text-success reply-link" href="javascript:void(0)">Reply</a>
-          <div class="comment-form" style="display: none;">
-            {{ Form::open(['route' => 'comments.store', 'method' => 'POST']) }}
-              {{ Form::label('content','Your comment:') }}
-              {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 3]) }}
+          @auth
+            <a class="text-success reply-link" href="javascript:void(0)">Reply</a>
+            <div class="comment-form" style="display: none;">
+              {{ Form::open(['route' => 'comments.store', 'method' => 'POST']) }}
+                {{ Form::label('content','Your comment:') }}
+                {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 3]) }}
 
-              {{ Form::hidden('post_id', $post->id) }}
-              {{ Form::hidden('user_id', Auth::user()->id) }}
-              {{ Form::hidden('comment_id', $comment->id) }}
-              {{ Form::hidden('level', ($comment->level == 2 ? $comment->level : $comment->level + 1))}}
+                {{ Form::hidden('post_id', $post->id) }}
+                {{ Form::hidden('user_id', Auth::user()->id) }}
+                {{ Form::hidden('comment_id', $comment->id) }}
+                {{ Form::hidden('level', ($comment->level == 2 ? $comment->level : $comment->level + 1))}}
 
-              {{ Form::submit('Save comment', ['class' => 'btn btn-secondary mt-2']) }}
+                {{ Form::submit('Save comment', ['class' => 'btn btn-secondary mt-2']) }}
 
-            {{ Form::close() }}
-          </div>
+              {{ Form::close() }}
+            </div>
+          @endauth
         </div>
       </div>
     @endforeach
