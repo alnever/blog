@@ -34,8 +34,10 @@
             {{ Auth::user()->name }}
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('posts.index') }}">Dashboard</a>
-            <div class="dropdown-divider"></div>
+            @if ( Auth::user()->hasRole('Author') )
+              <a class="dropdown-item" href="{{ route('posts.index') }}">Dashboard</a>
+              <div class="dropdown-divider"></div>
+            @endif
             <!-- logout button -->
             {{ Form::open(['route' => 'logout', 'method' => 'POST']) }}
               {{ Form::submit('Logout', ['class' => 'dropdown-item'])}}

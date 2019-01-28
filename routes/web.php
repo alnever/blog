@@ -37,11 +37,12 @@ Route::get('/tag/{slug}','BlogController@getTag')
 // use middleware auth to prevern unauthorized access
 
 Route::group(['middleware' => 'auth'], function() {
-  Route::resource('/posts','PostController');
-  Route::resource('/categories','CategoryController');
-  Route::resource('/tags','TagController');
-  Route::resource('/messages','MessageController');
-  Route::resource('/answers','AnswerController');
+  Route::resource('/posts','PostController')->middleware('role:Author');
+  Route::resource('/categories','CategoryController')->middleware('role:Author');
+  Route::resource('/tags','TagController')->middleware('role:Author');
+  Route::resource('/messages','MessageController')->middleware('role:Administrator');
+  Route::resource('/answers','AnswerController')->middleware('role:Administrator');
+  Route::resource('/users','UserController')->middleware('role:Administrator');
 });
 
 Auth::routes();
