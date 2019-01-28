@@ -43,6 +43,9 @@ class CommentController extends Controller
         ]);
 
         $comment = new Comment($request->all());
+        if ($comment->comment_id && $comment->comment_id != 0) {
+          $comment->level++;
+        }
         $comment->save();
 
         Session::flash('success','Your comment was accepted and it will be moderated asap.');

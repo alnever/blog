@@ -23,8 +23,10 @@ class BlogController extends Controller
       // find a post
       $post = Post::where('slug', '=', $slug)->first();
 
-      // comments
-      $comments = Comment::where('post_id','=',$post->id)
+      // comments - get just top-level comments
+      $comments = Comment::where('level','=',0)
+        ->where('approved','=',1)
+        ->where('post_id','=',$post->id)
         ->orderBy('created_at','desc')
         ->paginate(10);
 
