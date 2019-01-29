@@ -8,7 +8,7 @@
     <div class="col-md-8">
       <h1 class="text-center">{{ $post->title }}</h1>
       <hr class="my-4" />
-      <p>{{ $post->content }}</p>
+      <p>{!! $post->content !!}</p>
       <hr>
 
       @if (count($post->categories) > 0)

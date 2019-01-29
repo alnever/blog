@@ -35,7 +35,7 @@
                   {{ $post->title }}
                 </a>
                 <!-- content excerpt -->
-                <p>{{ Str::words($post->content,20) }}</p>
+                <p>{!! Str::words($post->content,20) !!}</p>
               </td>
               <td style="white-space:nowrap;">
                 <!-- create date -->

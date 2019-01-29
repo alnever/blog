@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Session;
+use Purifier;
 
 use App\Category;
 use App\Tag;
@@ -54,6 +55,7 @@ class PostController extends Controller
 
         // store in the database
         $post = new Post($request->all());
+        $post->content = Purifier::clean($request->input('content'));
         $post->save();
 
         // add categories
@@ -142,6 +144,7 @@ class PostController extends Controller
 
       // update data
       $post->update($request->all());
+      $post->content = Purifier::clean($request->input('content'));
 
       // save data
       $post->save();

@@ -16,7 +16,7 @@
         <div class="jumbotron bg-light">
           <h3 class="text-primary">{{ $post->title }}</h3>
           <p>
-            {{ Str::words($post->content, 30) }}
+            {!! Str::words($post->content, 30) !!}
           </p>
           <p class="text-right">
             <a class="btn btn-primary" href="{{ route('post.single', $post->slug) }}">Read more...</a>

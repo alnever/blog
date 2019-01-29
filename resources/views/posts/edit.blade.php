@@ -5,6 +5,13 @@
 @section('styles')
   <!-- for select 2 -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <!-- tinyMCE -->
+  <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+  <script type="text/javascript">
+    tinymce.init({
+      selector: "textarea[name=content]",
+    });
+  </script>
 @endsection
 
 @section('content')
@@ -27,7 +34,7 @@
       {{ Form::select('tags[]', $tags, null, ['class' => 'tags-select2-multi form-control', 'multiple' => 'multiple']) }}
 
       {{ Form::label('content', 'Content:') }}
-      {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
+      {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8']) }}
     </div>
 
     <!-- info and service area -->

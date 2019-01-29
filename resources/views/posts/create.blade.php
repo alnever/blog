@@ -5,13 +5,21 @@
 @section('styles')
   <!-- for select 2 -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+  <!-- tinyMCE -->
+  <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+  <script type="text/javascript">
+    tinymce.init({
+      selector: "textarea[name=content]",
+    });
+  </script>
 @endsection
 
 @section('content')
   <h1>Create post</h1>
 
 
-  {{ Form::open(['route' => 'posts.store']) }}
+  {{ Form::open(['route' => 'posts.store', 'method' => 'POST']) }}
     <div class="row">
       <!-- main panel -->
       <div class="col-md-8">
@@ -41,7 +49,7 @@
         </div>
 
         {{ Form::label('content', 'Content:') }}
-        {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8','required']) }}
+        {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8']) }}
 
       </div> <!-- end of main panel -->
 

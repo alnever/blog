@@ -8,7 +8,7 @@
   <p>
     <small>Created At: {{ date('M d, y', strtotime($post->created_at)) }}</small>
   </p>
-  <p>{{ $post->content }}</p>
+  <p>{!! $post->content !!}</p>
   <hr />
   @if ($post->category)
     <p>Posted In: {{ $post->category->name }}</p>
