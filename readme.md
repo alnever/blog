@@ -24,7 +24,7 @@ v. 1.0.0
 - Users management;
 - Contact form and Answers management.
 
-## Posts, categories and tag management
+## Posts, categories, tag, and commentaries management
 
 v. 1.0.0
 - The authorized users having appropriate permissions can create, modify and delete posts.
@@ -36,6 +36,16 @@ v. 1.0.0
 - Posts may be commented by authorized users only.
 - The users having appropriate permissions can create any number of categories and tags.
 - The users can view through the whole list of posts, every single post, and all posts with a given category.
+
+v. 1.0.0-1
+
+The relationship between posts and users is added:
+
+- Each post has an owner which should be an authorized user. The owner is defined when the post have been created and can not be changed.
+- If the owner's account were deleted, his/her posts will have no owner.
+- The owners can edit and delete their posts.
+- The users can just view the post which are not owned by them.
+- The administrators can edit and delete any post.
 
 ## User management
 
