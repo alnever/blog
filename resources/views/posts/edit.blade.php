@@ -19,7 +19,7 @@
 
 @section('content')
   <h1>Edit post</h1>
-  {{ Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) }}
+  {{ Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) }}
   <div class="row">
 
     <!-- post area -->
@@ -35,6 +35,14 @@
 
       {{ Form::label('tags', 'Tags:') }}
       {{ Form::select('tags[]', $tags, null, ['class' => 'tags-select2-multi form-control', 'multiple' => 'multiple']) }}
+
+      <div class="">
+        {{ Form::label('featured_image','Featured image:')}}
+        {{ Form::file('featured_image') }}
+        @if ($post->featured_image)
+          <img src="{{ asset('images/' . $post->featured_image) }}" />
+        @endif
+      </div>
 
       {{ Form::label('content', 'Content:') }}
       {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => '8']) }}

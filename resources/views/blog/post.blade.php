@@ -4,6 +4,11 @@
 
 @section('content')
   <h1 class="display-4 text-center">{{ $post->title }}</h1>
+
+  @if ($post->featured_image)
+    <img src="{{ asset('images/' . $post->featured_image) }}" />
+  @endif
+
   <hr class="my-4" />
   <p>
     <small>Created At: {{ date('M d, y', strtotime($post->created_at)) }}</small>

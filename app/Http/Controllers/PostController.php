@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Session;
 use Purifier;
+use Intervention\Image\Facades\Image as Image;
 
 use App\Category;
 use App\Tag;
@@ -55,7 +56,23 @@ class PostController extends Controller
 
         // store in the database
         $post = new Post($request->all());
+
+        // sanitize content
         $post->content = Purifier::clean($request->input('content'));
+
+        // save image
+        if ($request->hasFile('featured_image')) {
+          $image = $request->file('featured_image');
+          $filename = time() . "." . $image->getClientOriginalExtension();
+          $location = public_path("images/" . $filename);
+
+          Image::make($image)->resize(1024, null, function($constraint) {
+            $constraint->aspectRatio();
+          })->save($location);
+
+          $post->featured_image = $filename;
+        }
+        // save the post
         $post->save();
 
         // add categories
@@ -144,7 +161,26 @@ class PostController extends Controller
 
       // update data
       $post->update($request->all());
+
+      // sanitize content
       $post->content = Purifier::clean($request->input('content'));
+
+      // save image
+      if ($request->hasFile('featured_image')) {
+        $image = $request->file('featured_image');
+        $filename = time() . "." . $image->getClientOriginalExtension();
+        $location = public_path("images/" . $filename);
+
+        Image::make($image)->resize(1024, null, function($constraint) {
+          $constraint->aspectRatio();
+        })->save($location);
+
+        // TODO::delete old image
+
+
+        // save to the database
+        $post->featured_image = $filename;
+      }
 
       // save data
       $post->save();

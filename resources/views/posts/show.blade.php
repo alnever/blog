@@ -6,6 +6,10 @@
   <div class="row">
     <!-- post area -->
     <div class="col-md-8">
+      @if ($post->featured_image)
+        <img src="{{ asset('images/' . $post->featured_image) }}" />
+      @endif
+      
       <h1 class="text-center">{{ $post->title }}</h1>
       <hr class="my-4" />
       <p>{!! $post->content !!}</p>

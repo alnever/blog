@@ -22,7 +22,7 @@
   <h1>Create post</h1>
 
 
-  {{ Form::open(['route' => 'posts.store', 'method' => 'POST']) }}
+  {{ Form::open(['route' => 'posts.store', 'method' => 'POST', 'files' => true]) }}
     <div class="row">
       <!-- main panel -->
       <div class="col-md-8">
@@ -49,6 +49,11 @@
               <option value="{{ $tag->id }}">{{ $tag->name }}</option>
             @endforeach
           </select>
+        </div>
+
+        <div class="">
+          {{ Form::label('featured_image','Featured image:')}}
+          {{ Form::file('featured_image') }}
         </div>
 
         {{ Form::label('content', 'Content:') }}
