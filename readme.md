@@ -2,6 +2,8 @@
 
 This basic project was created with Laravel 5.7 for a blog.
 
+Author: Alex Neverov
+
 The project is featured with:
 
 - Laravel 5.7
