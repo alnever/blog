@@ -11,6 +11,9 @@
   <script type="text/javascript">
     tinymce.init({
       selector: "textarea[name=content]",
+      plugins: 'textcolor lists codesample link code',
+      toolbar: 'undo redo |  formatselect | bold italic underline | forecolor backcolor | numlist bullist | code codesample | link',
+      menubar: false
     });
   </script>
 @endsection
