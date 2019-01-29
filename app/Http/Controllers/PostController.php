@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
 use Session;
 use Purifier;
 use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Facades\File;
 
+use App\Post;
 use App\Category;
 use App\Tag;
 use App\Comment;
@@ -52,6 +53,7 @@ class PostController extends Controller
           'title' => ['required', 'min:1', 'max:255'],
           'content' => ['required'],
           'slug' => ['required','min:5','max:255','alpha_dash','unique:posts,slug',],
+          'featured_image' => ['mimes:jpeg,png'],
         ]);
 
         // store in the database
@@ -150,12 +152,14 @@ class PostController extends Controller
         $this->validate($request,[
           'title' => ['required', 'min:1', 'max:255'],
           'content' => ['required'],
+          'featured_image' => ['mimes:jpeg,png'],
         ]);
       } else {
         $this->validate($request,[
           'title' => ['required', 'min:1', 'max:255'],
           'content' => ['required'],
           'slug' => ['required','min:5','max:255','alpha_dash','unique:posts,slug',],
+          'featured_image' => ['mimes:jpeg,png'],
         ]);
       }
 
@@ -168,15 +172,20 @@ class PostController extends Controller
       // save image
       if ($request->hasFile('featured_image')) {
         $image = $request->file('featured_image');
-        $filename = time() . "." . $image->getClientOriginalExtension();
+
+        // replace file if exists
+        if ($post->featured_image && $post->featured_image != '') {
+          $filename = $post->featured_image;
+        } else {
+          $filename = time() . "." . $image->getClientOriginalExtension();
+        }
+
+        //
         $location = public_path("images/" . $filename);
 
         Image::make($image)->resize(1024, null, function($constraint) {
           $constraint->aspectRatio();
         })->save($location);
-
-        // TODO::delete old image
-
 
         // save to the database
         $post->featured_image = $filename;
@@ -209,6 +218,8 @@ class PostController extends Controller
     {
         // find a post
         $post = Post::find($id);
+        // delete post image
+        File::delete(public_path("images/" . $post->featured_image));
         // delete post
         $post->delete();
         // flash message
