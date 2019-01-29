@@ -58,6 +58,12 @@
           </p>
         </dl>
         <dl class="col-12">
+          <label>Author:</label>
+          <p>
+              {{ $post->user->name }}
+          </p>
+        </dl>
+        <dl class="col-12">
           <label>Created At:</label>
           <p>{{ date('Y-m-d H:i:s', strtotime($post->created_at)) }}</p>
         </dl>

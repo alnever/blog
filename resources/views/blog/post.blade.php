@@ -3,15 +3,15 @@
 @section('title', '| Post')
 
 @section('content')
-  <h1 class="display-4 text-center">{{ $post->title }}</h1>
-
   @if ($post->featured_image)
     <img src="{{ asset('images/' . $post->featured_image) }}" />
   @endif
 
+  <h1 class="display-4 text-center">{{ $post->title }}</h1>
+
   <hr class="my-4" />
   <p>
-    <small>Created At: {{ date('M d, y', strtotime($post->created_at)) }}</small>
+    <small>Created At: {{ date('M d, Y', strtotime($post->created_at)) }} by {{ $post->user->name }}</small>
   </p>
   <p>{!! $post->content !!}</p>
   <hr />
@@ -39,7 +39,16 @@
     </div>
   @endif
 
-  <h3>Comments:</h3>
+  <hr class="my-4" />
+
+  <p>
+    <span class="h4">Comments</span>
+    {{ count($post->comments) }} total
+    @auth
+      <a href="javascript:bois(0)" class="text-success post-comment-link">Write a comment</a>
+    @endauth
+  </p>
+
   <!-- Comment form -->
   @include('partials._messages')
 
@@ -50,7 +59,7 @@
   @endguest
 
   @auth
-    <div class="border border-secondary rounded p-2">
+    <div class="border border-secondary rounded p-2 post-comment-form" style="display: none;">
       {{ Form::open(['route' => 'comments.store', 'method' => 'POST']) }}
         {{ Form::label('content','Your comment:') }}
         {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
@@ -72,8 +81,6 @@
       {{ $comments->links() }}
     </div>
 
-  @else
-      <p>No comments</p>
   @endif
 
 @endsection
@@ -87,6 +94,10 @@
     // open from for reply link
     $('.reply-link').on('click', function() {
       $(this).siblings('.comment-form').css('display','');
+    });
+
+    $('.post-comment-link').on('click', function() {
+      $('.post-comment-form').css('display','');
     });
   </script>
 

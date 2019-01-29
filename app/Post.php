@@ -45,4 +45,9 @@ class Post extends Model
    public function comments() {
      return $this->hasMany('App\Comment');
    }
+
+   // get the user - the owner - of the post
+   public function user() {
+     return $this->belongsTo('App\User');
+   }
 }

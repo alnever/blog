@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\CheckUserRole::class,
+        'post-owner' => \App\Http\Middleware\CheckPostOwner::class,
     ];
 
     /**
@@ -77,5 +78,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
+        \App\Http\Middleware\CheckUserRole::class,
+        \App\Http\Middleware\CheckPostOwner::class,
     ];
 }

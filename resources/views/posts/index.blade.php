@@ -22,6 +22,7 @@
         <thead class="thead-light">
           <th>#</th>
           <th>Title</th>
+          <th>Author</th>
           <th style="white-space:nowrap;">Created At</th>
           <th></th>
         </thead>
@@ -36,6 +37,9 @@
                 </a>
                 <!-- content excerpt -->
                 <p>{!! Str::words($post->content,20) !!}</p>
+              </td>
+              <td>
+                {{ $post->user->name }}
               </td>
               <td style="white-space:nowrap;">
                 <!-- create date -->

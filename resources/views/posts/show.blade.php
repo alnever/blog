@@ -9,7 +9,7 @@
       @if ($post->featured_image)
         <img src="{{ asset('images/' . $post->featured_image) }}" />
       @endif
-      
+
       <h1 class="text-center">{{ $post->title }}</h1>
       <hr class="my-4" />
       <p>{!! $post->content !!}</p>
@@ -91,6 +91,12 @@
           <label>Url:</label>
           <p>
               <a href="{{  route('post.single', $post->slug)  }}" target="_blank">{{ url($post->slug) }}</a>
+          </p>
+        </dl>
+        <dl class="col-12">
+          <label>Author:</label>
+          <p>
+              {{ $post->user->name }}
           </p>
         </dl>
         <dl class="col-12">

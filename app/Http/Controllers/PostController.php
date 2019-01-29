@@ -7,6 +7,7 @@ use Session;
 use Purifier;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 use App\Post;
 use App\Category;
@@ -53,7 +54,7 @@ class PostController extends Controller
           'title' => ['required', 'min:1', 'max:255'],
           'content' => ['required'],
           'slug' => ['required','min:5','max:255','alpha_dash','unique:posts,slug',],
-          'featured_image' => ['mimes:jpeg,png'],
+          'featured_image' => ['image'],
         ]);
 
         // store in the database
@@ -74,6 +75,10 @@ class PostController extends Controller
 
           $post->featured_image = $filename;
         }
+
+        // set user_id
+        $post->user_id = Auth::user()->id;
+
         // save the post
         $post->save();
 
@@ -152,7 +157,7 @@ class PostController extends Controller
         $this->validate($request,[
           'title' => ['required', 'min:1', 'max:255'],
           'content' => ['required'],
-          'featured_image' => ['mimes:jpeg,png'],
+          'featured_image' => ['image'],
         ]);
       } else {
         $this->validate($request,[
