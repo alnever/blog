@@ -5,10 +5,10 @@ This basic project was created with Laravel 5.7 for a blog.
 The project is featured with:
 
 - Laravel 5.7
-- Bootstap 4
+- Bootstrap 4
 - tinyMCE 4
 - select2
-- collective/html
+- laravelcollective/html
 - investigation/image
 - mews/purifier
 
