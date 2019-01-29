@@ -42,7 +42,7 @@ v. 1.0.0-1
 The relationship between posts and users is added:
 
 - Each post has an owner which should be an authorized user. The owner is defined when the post have been created and can not be changed.
-- If the owner's account were deleted, his/her posts will have no owner.
+- If the owner's account was deleted, his/her posts would have no owner.
 - The owners can edit and delete their posts.
 - The users can just view the post which are not owned by them.
 - The administrators can edit and delete any post.
