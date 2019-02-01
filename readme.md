@@ -11,7 +11,7 @@ The project is featured with:
 - tinyMCE 4
 - select2
 - laravelcollective/html
-- investigation/image
+- intervention/image
 - mews/purifier
 
 ## Main features
